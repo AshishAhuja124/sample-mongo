@@ -1,15 +1,15 @@
-var fs=require('fs');
-var express = require('express');  //Express module
-var app = express();               
+let fs=require('fs');
+let express = require('express');  //Express module
+let app = express();               
 let bodyParser = require('body-parser');     //To parse the file in the browser
-var prompt=require('prompt');
-var shuffle = require('shuffle-array');
+let prompt=require('prompt');
+let shuffle = require('shuffle-array');
 var range=require('range');
 var array=require('node-array');
 var readline = require('readline');
 var readFile=require('read-file');
-var mongo = require('mongodb');     
-var MongoClient = require('mongodb').MongoClient;
+let mongo = require('mongodb');     
+let MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/test';   
 prompt.start();
 app.use(bodyParser());               //use of parser
@@ -32,11 +32,10 @@ MongoClient.connect(url, function (err, db) {
       res.send("We are not able to connect to mongodb");
     }
     else{
-      let client = db.db('test');
-  client.collection('student').insertMany(f, function(err, response) {
+  db.collection('student').insertMany(f, function(err, response) {
 if(err){response.send(" Unable to insert json")}
 });}
- client.collection('student').find({}).toArray(function(err,resp){
+ db.collection('student').find({}).toArray(function(err,resp){
      if (err) {
       resp.send(" Unable to retreive students data from database.");
             }
